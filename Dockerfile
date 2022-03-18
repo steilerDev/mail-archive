@@ -4,6 +4,15 @@ ENV DEBIAN_FRONTEND noninteractive
 # Ensure that a valid SSL certificate is present and restart in order to load the (hopefully) renewed certificate
 HEALTHCHECK --interval=5s --timeout=10s --retries=3 CMD true | openssl s_client -connect localhost:993 2>/dev/null | openssl x509 -noout -checkend 0
 
+# Install dependencies to add repo
+RUN apt-get update && \
+    apt-get -y upgrade && \
+    apt-get install \
+        --no-install-recommends \
+        --fix-missing \
+        --assume-yes \
+            curl gpg transport-https
+
 # Add dovecot repo & trust it
 RUN curl https://repo.dovecot.org/DOVECOT-REPO-GPG | gpg --import && \  
     gpg --export ED409DA1 > /etc/apt/trusted.gpg.d/dovecot.gpg && \
