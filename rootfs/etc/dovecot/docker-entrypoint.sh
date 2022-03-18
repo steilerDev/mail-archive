@@ -17,8 +17,13 @@ if [ -z ${!user_var} ] && [ ! -f ${PASSWD_FILE} ]; then
     echo "No $user_var defined and unable to find ${PASSWD_FILE}. Cannot startup without user definitions!"
     exit 1
 elif [ ! -z ${!user_var} ]; then
-    echo "User definition found, overwriting ${PASSWO_FILE}"
-    > $PASSWD_FILE
+    if [ -f ${PASSWD_FILE} ]; then
+        echo "User definition found, overwriting ${PASSWO_FILE}"
+        > $PASSWD_FILE
+    else
+        echo "Creating user definition from environment..."
+    fi
+
     while [ ! -z ${!user_var} ]; do
         THIS_USER="${!user_var}"
         if [[ $THIS_USER =~ ":" ]]; then

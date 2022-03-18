@@ -41,7 +41,7 @@ services:
     volumes:
       - /opt/docker/mail:/mail-data
       - /opt/docker/nginx-proxy/volumes/certs/mail.doe.de:/ssl:ro
-      - /conf
+      - /opt/docker/mail-archive/volumes/conf:/conf
 networks:
   default:
     external:
