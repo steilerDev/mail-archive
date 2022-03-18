@@ -2,6 +2,8 @@
 
 PASSWD_FILE="/etc/dovecot/users"
 CONF_FILE="/etc/dovecot/dovecot-docker.conf"
+DH_PARAMS_DIR="/dh-params"
+DH_PARAMS="$DH_PARAMS_DIR/dhparams.pem"
 THIS_GID=2000
 UID_OFFSET=2000
 
@@ -35,5 +37,11 @@ else
     done
     echo "All users created!"
 fi
+
+if [ ! -f $DH_PARAMS ]; then
+    echo "No DH Parameters found, creating..."
+    openssl dhparam -out $DH_PARAMS 4096
+fi
+
 echo "Starting dovecot..."
 exec /usr/sbin/dovecot -c "/etc/dovecot/dovecot-docker.conf" -F
