@@ -16,8 +16,6 @@ RUN apt-get update && \
     apt-get autoremove && \
     rm -rf /var/lib/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
-# Clean up pre-packaged conf files
-RUN rm -rf /etc/dovecot/dovecot.conf /etc/dovecot/conf.d/*
 RUN useradd -mUs /bin/bash vmail
 
 EXPOSE 993
