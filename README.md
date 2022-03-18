@@ -34,8 +34,8 @@ services:
     container_name: mail-archive
     restart: unless-stopped
     environment:
-        LETSENCRYPT_HOST: mail.steilergroup.net
-        IMAP_USER_1: "john@archive.doe.de:super-secure-password"
+        LETSENCRYPT_HOST: mail.doe.net
+        IMAP_USER_1: "john@archive.doe.net:super-secure-password"
     ports:
       - "993:993"
     volumes:

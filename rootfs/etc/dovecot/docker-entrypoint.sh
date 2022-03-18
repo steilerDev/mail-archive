@@ -13,7 +13,7 @@ uservar_base="IMAP_USER_"
 user_index=1
 user_var="${uservar_base}${user_index}"
 
-if [ -z ${!user_var} && ! -f ${PASSWD_FILE} ]; then
+if [ -z ${!user_var} ] && [ ! -f ${PASSWD_FILE} ]; then
     echo "No $user_var defined and unable to find ${PASSWD_FILE}. Cannot startup without user definitions!"
     exit 1
 elif [ ! -z ${!user_var} ]; then
