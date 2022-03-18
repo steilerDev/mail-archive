@@ -34,7 +34,6 @@ else
         user_var="${uservar_base}${user_index}"
     done
     echo "All users created!"
-    cat $PASSWD_FILE
 fi
 echo "Starting dovecot..."
-exec /usr/sbin/dovecot -c "/etc/dovecot/dovecot.conf" -F
+exec /usr/sbin/dovecot -c "/etc/dovecot/dovecot-docker.conf" -F

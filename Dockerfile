@@ -17,7 +17,8 @@ RUN apt-get update && \
     rm -rf /var/lib/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
 RUN useradd -mUs /bin/bash vmail
-
+# Clean up pre-packaged conf files
+RUN rm -rf /etc/dovecot/dovecot.conf /etc/dovecot/conf.d/*
 EXPOSE 993
 VOLUME ["/mail-data", "/ssl", "/etc/dovecot/conf.d/"]
 
