@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PASSWD_FILE="/etc/dovecot/users"
-#PASSWD_FILE="./users"
+CONF_FILE="/etc/dovecot/dovecot-docker.conf"
 THIS_GID=2000
 UID_OFFSET=2000
 
@@ -17,13 +17,11 @@ if [ -z ${!user_var} ]; then
 else
     > $PASSWD_FILE
     while [ ! -z ${!user_var} ]; do
-        # frank@archive.steiler.de:$2y$05$ZDXN7K7xiHWdKYntc1wG.ubkzhlXKwaa1oup5IZTthQNT/T7j1wbe:2000:2000::/home/virtual/test
         THIS_USER="${!user_var}"
         if [[ $THIS_USER =~ ":" ]]; then
             USERNAME=${THIS_USER%%:*} 
             PASSWORD=${THIS_USER#*:}
             HASHED_PASSWORD=$(doveadm pw -s SHA512-CRYPT -p ${PASSWORD})
-            #HASHED_PASSWORD="xx${PASSWORD}xx"
             THIS_UID=$((user_index+$UID_OFFSET))
             echo "${USERNAME}:${HASHED_PASSWORD}:${THIS_UID}:${THIS_GID}::/home/virtual/test" >> $PASSWD_FILE
             echo "Created user $USERNAME"
@@ -39,3 +37,4 @@ else
     cat $PASSWD_FILE
 fi
 echo "Starting dovecot..."
+exec /usr/sbin/dovecot -c "/etc/dovecot/dovecot.conf" -F
