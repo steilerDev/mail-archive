@@ -11,7 +11,7 @@ RUN apt-get update && \
         --no-install-recommends \
         --fix-missing \
         --assume-yes \
-            curl gpg transport-https
+            curl gpg apt-transport-https
 
 # Add dovecot repo & trust it
 RUN curl https://repo.dovecot.org/DOVECOT-REPO-GPG | gpg --import && \  
