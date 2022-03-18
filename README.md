@@ -19,7 +19,7 @@ The following paths are recommended for persisting state and/or accessing config
  - `/ssl`  
     This is where the SSL private key (`./key.pem`) and certificate (`./fullchain.pem`) are expected. It is possible to map this to the respective folder for this mail server's domain within `acme-companion` (**Required**)
   - `/conf`  
-    Location of the user db (`./users`), which will be generated on startup - if the correct environment variables are set - and the Diffie Hellmann parameters (`./dhparams.pem`), which will be generated if not present on startup, will be stored
+    Location of the user db (`./users`), which will be generated on startup - if the correct environment variables are set - and the Diffie Hellmann parameters (`./dhparams.pem`), which will be generated if not present on startup, will be stored (**Recommended**)
   - `/etc/dovecot/docker-conf.d/`  
     An optional directory to overwrite the dovecot configuration provided by this container (files matching `*.conf` will be read in ASCII order). See [available settings](https://doc.dovecot.org/settings/#settings) and [documentation of importing](https://doc.dovecot.org/configuration_manual/config_file/). 
 
@@ -41,6 +41,7 @@ services:
     volumes:
       - /opt/docker/mail:/mail-data
       - /opt/docker/nginx-proxy/volumes/certs/mail.doe.de:/ssl:ro
+      - /conf
 networks:
   default:
     external:
