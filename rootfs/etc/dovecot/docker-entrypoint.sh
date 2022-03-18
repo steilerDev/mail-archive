@@ -1,9 +1,9 @@
 #!/bin/bash
 
-PASSWD_FILE="/etc/dovecot/users"
 CONF_FILE="/etc/dovecot/dovecot-docker.conf"
-DH_PARAMS_DIR="/dh-params"
-DH_PARAMS="$DH_PARAMS_DIR/dhparams.pem"
+CONF_DIR="/conf"
+PASSWD_FILE="${CONF_DIR}/users"
+DH_PARAMS="${CONF_DIR}/dhparams.pem"
 THIS_GID=2000
 UID_OFFSET=2000
 
@@ -13,10 +13,11 @@ uservar_base="IMAP_USER_"
 user_index=1
 user_var="${uservar_base}${user_index}"
 
-if [ -z ${!user_var} ]; then
-    echo "No $user_var defined, cannot startup without user definitions!"
+if [ -z ${!user_var} && ! -f ${PASSWD_FILE} ]; then
+    echo "No $user_var defined and unable to find ${PASSWD_FILE}. Cannot startup without user definitions!"
     exit 1
-else
+elif [ ! -z ${!user_var} ]
+    echo "User definition found, overwriting ${PASSWO_FILE}"
     > $PASSWD_FILE
     while [ ! -z ${!user_var} ]; do
         THIS_USER="${!user_var}"

@@ -19,7 +19,7 @@ RUN apt-get update && \
 RUN useradd -mUs /bin/bash vmail
 
 EXPOSE 993
-VOLUME ["/mail-data", "/ssl", "/etc/dovecot/docker-conf.d/", "/dh-params"]
+VOLUME ["/mail-data", "/ssl", "/etc/dovecot/docker-conf.d/", "/conf"]
 
 WORKDIR /etc/dovecot
 
