@@ -2,7 +2,7 @@ FROM debian:bullseye
 ENV DEBIAN_FRONTEND noninteractive
 
 # Ensure that a valid SSL certificate is present and restart in order to load the (hopefully) renewed certificate
-HEALTHCHECK --interval=5s --timeout=10s --retries=3 CMD true | openssl s_client -connect localhost:993 2>/dev/null | openssl x509 -noout -checkend 0
+HEALTHCHECK --interval=1m --timeout=10s --retries=3 CMD true | openssl s_client -connect localhost:993 2>/dev/null | openssl x509 -noout -checkend 0
 
 # Install stuff and remove caches
 RUN apt-get update && \
