@@ -16,7 +16,7 @@ user_var="${uservar_base}${user_index}"
 if [ -z ${!user_var} && ! -f ${PASSWD_FILE} ]; then
     echo "No $user_var defined and unable to find ${PASSWD_FILE}. Cannot startup without user definitions!"
     exit 1
-elif [ ! -z ${!user_var} ]
+elif [ ! -z ${!user_var} ]; then
     echo "User definition found, overwriting ${PASSWO_FILE}"
     > $PASSWD_FILE
     while [ ! -z ${!user_var} ]; do
