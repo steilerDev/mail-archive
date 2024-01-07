@@ -6,10 +6,6 @@ env:
   PKG_NAME: mail-archive
 
 # Required secrets:
-# DOCKER_DEV_HOST       Self-hosted docker registry
-# DOCKER_DEV_USERNAME   Username for self-hosted docker registry
-# DOCKER_DEV_PWD        Password for self-hosted docker registry
-#
 # DOCKER_USERNAME       DockerHub username
 # DOCKER_PWD            DockerHub password
 
@@ -32,24 +28,6 @@ jobs:
       with:
         name: rootfs
         path: ./rootfs.tar.gz
-
-  publish-docker-dev:
-    name: Publish Project to steilerGroup-Docker
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Download artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: rootfs
-    - name: Login to Docker Registry
-      run: docker login ${{secrets.DOCKER_DEV_HOST}} -u ${{secrets.DOCKER_DEV_USERNAME}} -p ${{secrets.DOCKER_DEV_PWD}}
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_DEV_HOST}}/$PKG_NAME:latest
-    - name: Push the Docker image
-      run: docker push ${{secrets.DOCKER_DEV_HOST}}/$PKG_NAME:latest
 
   publish-dockerhub:
     name: Publish Project to DockerHub
