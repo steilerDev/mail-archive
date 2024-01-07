@@ -13,7 +13,7 @@ RUN apt-get update && \
         --no-install-recommends \
         --fix-missing \
         --assume-yes \
-            tar curl dovecot-core=$DOVECOT_VERSION dovecot-imapd=$DOVECOT_VERSION && \
+            tar curl ca-certificates dovecot-core=$DOVECOT_VERSION dovecot-imapd=$DOVECOT_VERSION && \
     apt-get clean autoclean && \
     apt-get autoremove && \
     rm -rf /var/lib/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
