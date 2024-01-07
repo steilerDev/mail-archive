@@ -9,7 +9,6 @@ env:
 # DOCKER_USERNAME       DockerHub username
 # DOCKER_PWD            DockerHub password
 
-
 jobs:
   build:
     name: Build Project

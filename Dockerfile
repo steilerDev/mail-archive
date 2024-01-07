@@ -1,6 +1,6 @@
 FROM debian:bullseye
 ENV DEBIAN_FRONTEND noninteractive
-ARG DOVECOT_VERSION="1:2.3.13+dfsg1-2"
+ARG DOVECOT_VERSION="1:2.3.13+dfsg1-2+deb11u1"
 ENV DOCKERVERSION=23.0.4
 
 # Ensure that a valid SSL certificate is present and restart in order to load the (hopefully) renewed certificate
