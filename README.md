@@ -1,3 +1,7 @@
+# Deprication Warning!
+
+This project is no longer maintained. Please consider switching to [dovecot/dovecot](https://hub.docker.com/r/dovecot/dovecot).
+
 # Mail Archive - Docker Container
 This docker container will spin up a simple IMAP server, using [dovecot](https://www.dovecot.org). The mailboxes can be configured through environmental variables. This can be used, in order to clean up cloud-based accounts, or when cancelling existing accounts. This long-term, low maintenance solutions keeps the messages viewable and searchable through a regular mail client. There is no WebUI, just an IMAP backend.
 
